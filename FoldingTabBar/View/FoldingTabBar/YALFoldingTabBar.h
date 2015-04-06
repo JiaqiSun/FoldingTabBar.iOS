@@ -4,7 +4,7 @@
 
 @class YALFoldingTabBar;
 
-@protocol YALTabBarViewDataSource <NSObject>
+@protocol YALTabBarViewDataSource <NSObject>   // tabBar数据源方法
 
 @required
 - (NSArray *)leftTabBarItemsInTabBarView:(YALFoldingTabBar *)tabBarView;
@@ -16,15 +16,22 @@
 @protocol YALTabBarViewDelegate <NSObject>
 
 @optional
+// 点击item 选择控制器
 - (void)itemInTabBarViewPressed:(YALFoldingTabBar *)tabBarView atIndex:(NSUInteger)index;
 
+// tabBar将折叠
 - (void)tabBarViewWillCollapse:(YALFoldingTabBar *)tabBarView;
+// tabBar将展开
 - (void)tabBarViewWillExpand:(YALFoldingTabBar *)tabBarView;
 
+// tabBar已经折叠
 - (void)tabBarViewDidCollapsed:(YALFoldingTabBar *)tabBarView;
+// tabBar已经展开
 - (void)tabBarViewDidExpanded:(YALFoldingTabBar *)tabBarView;
 
+// 左外item被点击
 - (void)extraLeftItemDidPressedInTabBarView:(YALFoldingTabBar *)tabBarView;
+// 右外item被点击
 - (void)extraRightItemDidPressedInTabBarView:(YALFoldingTabBar *)tabBarView;
 
 @end

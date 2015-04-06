@@ -9,8 +9,8 @@
 #import "CATransaction+TransactionWithAnimationsAndCompletion.h"
 
 typedef NS_ENUM(NSUInteger, YALAnimatingState) {
-    YALAnimatingStateCollapsing,
-    YALAnimatingStateExpanding
+    YALAnimatingStateCollapsing,  // 折叠
+    YALAnimatingStateExpanding    // 展开
 };
 
 #import "YALAnimatingTabBarConstants.h"
@@ -24,6 +24,7 @@ typedef NS_ENUM(NSUInteger, YALAnimatingState) {
 @property (nonatomic, assign) BOOL isFinishedCenterButtonAnimation;
 
 @property (nonatomic, strong) UIButton *centerButton;
+// 主视图
 @property (nonatomic, strong) UIView *mainView;
 
 @property (nonatomic, assign) BOOL isAnimated;
@@ -33,10 +34,10 @@ typedef NS_ENUM(NSUInteger, YALAnimatingState) {
 
 @property (nonatomic, assign) CGRect collapsedBounds;
 @property (nonatomic, assign) CGRect expandedBounds;
-
+// 计数器
 @property (nonatomic, assign) NSUInteger counter;
 
-//buttons used instead of native tabBarItems to switch between controllers
+//buttons used instead of native tabBarItems to switch between controllers  按钮用来代替本地tabBarItems控制器之间进行切换
 @property (nonatomic, strong) NSArray *leftButtonsArray;
 @property (nonatomic, strong) NSArray *rightButtonsArray;
 
@@ -45,10 +46,12 @@ typedef NS_ENUM(NSUInteger, YALAnimatingState) {
 @property (nonatomic, strong) UIButton *extraRightButton;
 
 //model representation of tabBarItems. also contains info for extraBarItems: image, color, etc
+// tabBarItems的模型表示。还包含extraBarItems的信息: 图片,颜色等
 @property (nonatomic, strong) NSDictionary *leftTabBarItems;
 @property (nonatomic, strong) NSDictionary *rightTabBarItems;
 
 //array of all buttons just for simple switching between controllers by index
+// 数组的所有按钮只是简单的切换控制器通过索引
 @property (nonatomic, strong) NSArray *allAdditionalButtons;
 @property (nonatomic, strong) NSMutableArray *allAdditionalButtonsBottomView;
 
@@ -95,6 +98,9 @@ typedef NS_ENUM(NSUInteger, YALAnimatingState) {
     [self prepareTabBarViewForInitialState];
 }
 
+/**
+ *  跟新UI前移除所有视图
+ */
 - (void)removeViewsBeforeUpdateUI {
 
     if (self.mainView) {
@@ -136,6 +142,9 @@ typedef NS_ENUM(NSUInteger, YALAnimatingState) {
     [self addSubview:self.centerButton];
 }
 
+/**
+ *  设置主视图
+ */
 - (void)setupMainView {
     self.mainView = [[UIView alloc] initWithFrame:UIEdgeInsetsInsetRect(self.bounds, self.tabBarViewEdgeInsets)];
         
@@ -147,6 +156,9 @@ typedef NS_ENUM(NSUInteger, YALAnimatingState) {
     [self addSubview:self.mainView];
 }
 
+/**
+ *  <#Description#>
+ */
 - (void)setupAdditionalTabBarItems {
     NSArray *leftTabBarItems = [self.dataSource leftTabBarItemsInTabBarView:self];
     NSArray *rightTabBarItems = [self.dataSource rightTabBarItemsInTabBarView:self];
@@ -154,7 +166,7 @@ typedef NS_ENUM(NSUInteger, YALAnimatingState) {
     NSUInteger numberOfLeftTabBarButtonItems = [leftTabBarItems count];
     NSUInteger numberOfRightTabBarButtonItems = [rightTabBarItems count];
     
-    //calculate available space for left and right side
+    //calculate available space for left and right side  计算左和右端可用空间
     CGFloat availableSpaceForAdditionalBarButtonItemLeft = CGRectGetWidth(self.mainView.frame) / 2.f - CGRectGetWidth(self.centerButton.frame) / 2.f - self.tabBarItemsEdgeInsets.left;
     
     CGFloat availableSpaceForAdditionalBarButtonItemRight = CGRectGetWidth(self.mainView.frame) / 2.f - CGRectGetWidth(self.centerButton.frame) / 2.f - self.tabBarItemsEdgeInsets.right;
@@ -265,7 +277,7 @@ typedef NS_ENUM(NSUInteger, YALAnimatingState) {
     self.rightButtonsArray = [mutableArray copy];
 }
 
-//collect all tabBarItems (models) to one array
+//collect all tabBarItems (models) to one array  收集所有tabBarItems(模型)到一个数组中
 - (void)setupBarItemsModelRepresentation {
     NSMutableArray *tempMutableArrayOfBarItems = [NSMutableArray array];
     

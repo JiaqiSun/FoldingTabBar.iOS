@@ -125,6 +125,9 @@
     [self.view addSubview:self.tabBarView];
 }
 
+/**
+ *  选择当前感兴趣的控制器
+ */
 - (id<YALTabBarInteracting>)currentInteractingViewController {
     if ([self.selectedViewController isKindOfClass:[UINavigationController class]]) {
         return (id<YALTabBarInteracting>)[(UINavigationController *)self.selectedViewController topViewController];
@@ -134,15 +137,23 @@
 }
 
 #pragma mark - YALTabBarViewDataSource
-
+/**
+ *  TabBarView 的左边items
+ */
 - (NSArray *)leftTabBarItemsInTabBarView:(YALFoldingTabBar *)tabBarView {
     return self.leftBarItems;
 }
 
+/**
+ *  TabBarView 的右边items
+ */
 - (NSArray *)rightTabBarItemsInTabBarView:(YALFoldingTabBar *)tabBarView {
     return self.rightBarItems;
 }
 
+/**
+ *  TabBarView 的中间item
+ */
 - (UIImage *)centerImageInTabBarView:(YALFoldingTabBar *)tabBarView {
     return self.centerButtonImage;
 }
@@ -191,6 +202,9 @@
     }
 }
 
+/**
+ *  点击item选择控制器
+ */
 - (void)itemInTabBarViewPressed:(YALFoldingTabBar *)tabBarView atIndex:(NSUInteger)index {
     self.selectedViewController = [self.viewControllers objectAtIndex:index];
 }

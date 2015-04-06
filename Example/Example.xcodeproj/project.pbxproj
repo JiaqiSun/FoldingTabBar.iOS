@@ -232,7 +232,7 @@
 			children = (
 				C92CAA4D1ACE8B7000F5645A /* Animation */,
 				C92CAA511ACE8B7000F5645A /* Category */,
-				C92CAA5A1ACE8B7000F5645A /* Constants */,
+				C92CAA5A1ACE8B7000F5645A /* Constants(常量) */,
 				C92CAA5D1ACE8B7000F5645A /* Controller */,
 				C92CAA611ACE8B7000F5645A /* Model */,
 				C92CAA651ACE8B7000F5645A /* Protocol */,
@@ -302,12 +302,13 @@
 			path = "CATransaction+TransactionWithAnimationsAndCompletion";
 			sourceTree = "<group>";
 		};
-		C92CAA5A1ACE8B7000F5645A /* Constants */ = {
+		C92CAA5A1ACE8B7000F5645A /* Constants(常量) */ = {
 			isa = PBXGroup;
 			children = (
 				C92CAA5B1ACE8B7000F5645A /* YALAnimatingTabBarConstants.h */,
 				C92CAA5C1ACE8B7000F5645A /* YALAnimatingTabBarConstants.m */,
 			);
+			name = "Constants(常量)";
 			path = Constants;
 			sourceTree = "<group>";
 		};
