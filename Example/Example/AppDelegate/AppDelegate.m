@@ -25,6 +25,7 @@
 }
 
 - (void)setupYALTabBarController {
+    // 折叠控制器
     YALFoldingTabBarController *tabBarController = (YALFoldingTabBarController *) self.window.rootViewController;
 
     //prepare leftBarItems
@@ -52,12 +53,16 @@
     tabBarController.rightBarItems = @[item3, item4];
     
     tabBarController.centerButtonImage = [UIImage imageNamed:@"plus_icon"];
-
+    
+    // 选中下标为2 的item
     tabBarController.selectedIndex = 2;
     
     //customize tabBarView
-    tabBarController.tabBarView.extraTabBarItemHeight = YALExtraTabBarItemsDefaultHeight;
+    // 设置 导航条额外部分的属性
+    tabBarController.tabBarView.extraTabBarItemHeight =  YALExtraTabBarItemsDefaultHeight;
     tabBarController.tabBarView.offsetForExtraTabBarItems = YALForExtraTabBarItemsDefaultOffset;
+    
+    // 设置导航条的属性
     tabBarController.tabBarView.backgroundColor = [UIColor colorWithRed:94.0/255.0 green:91.0/255.0 blue:149.0/255.0 alpha:1];
     tabBarController.tabBarView.tabBarColor = [UIColor colorWithRed:72.0/255.0 green:211.0/255.0 blue:178.0/255.0 alpha:1];
     tabBarController.tabBarViewHeight = YALTabBarViewDefaultHeight;

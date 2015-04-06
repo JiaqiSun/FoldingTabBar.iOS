@@ -57,10 +57,22 @@
     
     [self.tabBar setBackgroundImage:[[UIImage alloc] init]];
     [self.tabBar setShadowImage:[[UIImage alloc] init]];
-    
-    self.tabBar.hidden = YES;
+    [self addCustomTabBar];
+
 }
 
+- (void)addCustomTabBar{
+    CGFloat tabBarViewOriginX = self.tabBar.frame.origin.x;
+    CGFloat tabBarViewSizeWidth = CGRectGetWidth(self.tabBar.frame);
+    
+    self.tabBarView.frame = CGRectMake(tabBarViewOriginX, 0, tabBarViewSizeWidth, self.tabBarViewHeight);
+    [self.tabBar addSubview:self.tabBarView];
+
+}
+
+/**
+ *  设置self.tabBar的Frame
+ */
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
@@ -73,7 +85,7 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
-    [self updateTabBarViewFrame];
+//    [self updateTabBarViewFrame];
 }
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex {
@@ -90,10 +102,20 @@
     CGFloat tabBarViewOriginY = self.tabBar.frame.origin.y;
     CGFloat tabBarViewSizeWidth = CGRectGetWidth(self.tabBar.frame);
     
-    self.tabBarView.frame = CGRectMake(tabBarViewOriginX, tabBarViewOriginY, tabBarViewSizeWidth, self.tabBarViewHeight);
+//    self.tabBarView.frame = CGRectMake(tabBarViewOriginX, tabBarViewOriginY, tabBarViewSizeWidth, self.tabBarViewHeight);
+    self.tabBarView.frame = CGRectMake(tabBarViewOriginX, 0, tabBarViewSizeWidth, self.tabBarViewHeight);
+    [self.tabBar addSubview:self.tabBarView];
     [self.tabBarView setNeedsLayout];
 }
-
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.tabBar.subviews enumerateObjectsUsingBlock:^(UIView *obj, NSUInteger idx, BOOL *stop) {
+        if(![obj isKindOfClass:[YALFoldingTabBar class]]){
+            [obj removeFromSuperview];
+        }
+    }];
+    NSLog(@"%@", self.tabBar.subviews);
+}
 - (void)setupTabBarView {
     self.tabBarView = [[YALFoldingTabBar alloc] initWithFrame:CGRectZero state:self.state];
         

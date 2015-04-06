@@ -14,7 +14,9 @@
 - (void)tabBarViewDidCollapsed;
 - (void)tabBarViewDidExpanded;
 
+// 左边额外部分被点
 - (void)extraLeftItemDidPressed;
+// 右边额外部分被点
 - (void)extraRightItemDidPressed;
 
 @end

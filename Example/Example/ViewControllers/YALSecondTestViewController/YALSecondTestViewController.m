@@ -2,7 +2,7 @@
 
 #import "YALSecondTestViewController.h"
 
-#define debug 1
+#define debug 0
 
 @implementation YALSecondTestViewController
 
@@ -43,5 +43,6 @@
         NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
     }
 }
+
 
 @end

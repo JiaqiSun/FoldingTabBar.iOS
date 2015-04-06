@@ -2,7 +2,7 @@
 
 #import "YALFirstTestViewController.h"
 
-#define debug 1
+#define debug 0
 
 @implementation YALFirstTestViewController
 

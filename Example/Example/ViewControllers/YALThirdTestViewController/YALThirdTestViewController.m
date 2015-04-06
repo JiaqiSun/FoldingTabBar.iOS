@@ -22,11 +22,14 @@ NSString *const YALChatDemeDateText = @"dateText";
 @implementation YALThirdTestViewController
 
 #pragma mark - View & LifeCycle
-
+/**
+ *  加载数据
+ */
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     self.chatDemoData = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"YALChatDemoList" ofType:@"plist"]];
+    NSLog(@"%@",self.navigationController.childViewControllers);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -44,8 +47,12 @@ NSString *const YALChatDemeDateText = @"dateText";
 }
 
 #pragma mark - Private
-
+/**
+ *  准备可视cells 在cell现实前 先让 cell 的x 为 - 的 willAppear 再在 DidAppear 执行animateVisibleCells 将x 变为原始的数据 这样 就可以添加动画效果
+ */
 - (void)prepareVisibleCellsForAnimation {
+    
+    
     for (int i = 0; i < [self.chatDemoCollectionView.visibleCells count]; i++) {
         YALChatDemoCollectionViewCell * cell = (YALChatDemoCollectionViewCell *) [self.chatDemoCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
         cell.frame = CGRectMake(-CGRectGetWidth(cell.bounds), cell.frame.origin.y, CGRectGetWidth(cell.bounds), CGRectGetHeight(cell.bounds));
@@ -106,6 +113,9 @@ NSString *const YALChatDemeDateText = @"dateText";
     }
 }
 
+/**
+ *  当视图发生形变的时候 执行 刷新视图  performBatchUpdates:nil completion:nil
+ */
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
          
@@ -137,7 +147,9 @@ NSString *const YALChatDemeDateText = @"dateText";
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
-
+/**
+ *  代理方法可以 给 特定的indexpath 设置不同的布局
+ */
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -147,4 +159,8 @@ NSString *const YALChatDemeDateText = @"dateText";
     return CGSizeMake(CGRectGetWidth(self.view.bounds), layout.itemSize.height);
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    UIViewController *VC =  segue.destinationViewController ;
+    VC.hidesBottomBarWhenPushed = YES;
+}
 @end
